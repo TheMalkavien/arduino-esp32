@@ -287,7 +287,7 @@ static esp_err_t zb_ota_upgrade_status_handler(const esp_zb_zcl_ota_upgrade_valu
   if (message->info.status == ESP_ZB_ZCL_STATUS_SUCCESS) {
     switch (message->upgrade_status) {
       case ESP_ZB_ZCL_OTA_UPGRADE_STATUS_START:
-        log_i("Zigbee - OTA upgrade start");
+        log_i("Zigbee - OTA upgrade start - PERSO");
         start_time = esp_timer_get_time();
         s_ota_partition = esp_ota_get_next_update_partition(NULL);
         assert(s_ota_partition);
