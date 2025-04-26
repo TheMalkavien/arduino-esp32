@@ -23,6 +23,11 @@ typedef enum esp_ota_element_tag_id_e {
 static const esp_partition_t *s_ota_partition = NULL;
 static esp_ota_handle_t s_ota_handle = 0;
 static bool s_tagid_received = false;
+static bool s_ota_in_progress = false;  // OTA in progress flag
+
+static bool zb_isOTAInProgress() {
+  return s_ota_in_progress;
+}
 
 // forward declaration of all implemented handlers
 static esp_err_t zb_attribute_set_handler(const esp_zb_zcl_set_attr_value_message_t *message);
@@ -300,6 +305,7 @@ static esp_err_t zb_ota_upgrade_status_handler(const esp_zb_zcl_ota_upgrade_valu
           log_e("Zigbee - Failed to begin OTA partition, status: %s", esp_err_to_name(ret));
           return ret;
         }
+        s_ota_in_progress = true;
         break;
       case ESP_ZB_ZCL_OTA_UPGRADE_STATUS_RECEIVE:
         total_size = message->ota_header.image_size;
