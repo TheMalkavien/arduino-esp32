@@ -25,7 +25,7 @@ static esp_ota_handle_t s_ota_handle = 0;
 static bool s_tagid_received = false;
 static bool s_ota_in_progress = false;  // OTA in progress flag
 
-static bool zb_isOTAInProgress() {
+bool zb_isOTAInProgress() {
   return s_ota_in_progress;
 }
 
